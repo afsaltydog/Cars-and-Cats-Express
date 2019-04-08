@@ -1,0 +1,19 @@
+<html>
+<head>
+    <title>Cats</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('stylesheets', filename='css/style.css') }}">
+</head>
+<body>
+        <header>
+            <div class="navbar navbar-dark bg-dark box-shadow">
+                <strong>New Car</strong>
+            </div>
+        </header>
+        <form action="/action_page.php">
+            Make: <input type="text" name="make"><br>
+            Model: <input type="text" name="model"><br>
+            Year: <input type="text" name="year"><br>
+            <input type="submit" value="Submit">
+        </form>
+</body>
+</html>

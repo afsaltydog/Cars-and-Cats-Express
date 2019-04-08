@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+ 	<title>Trivia</title>
+   <!--<script type="text/javascript" src="jsHuntingGithub.js" defer></script>-->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<script>
+		$(document).ready(function() {
+
+			$("button").click(function() {
+				$.get("https://opentdb.com/api.php?amount=10&category=11&difficulty=easy&type=multiple", 
+					function(data) {
+				  		console.log(data.results);
+				  		// console.table(data.results);
+				  		console.log(data.results[0].incorrect_answers[0]);
+				  		console.log(data.results[0].correct_answer);
+				  		 $("h1").html(data.results[0].category);
+				  		 $("h3").html(data.results[0].question);
+				  		let corIndex = Math.floor(Math.random() * 3) + 0;
+				  		var f = document.createElement("form");
+						
+						
+						let j = 0;
+						let answer = "";
+						var html_data = "";
+				  		for (let i = 0; i < 4; i++){
+				  			answer = data.results[0].incorrect_answers[i];
+				  			console.log("incorrect answer: "+answer);
+				  			if (i == corIndex){
+								html_data += `<div><input type="radio" name="answer" value="${data.results[0].correct_answer}" id="1">${data.results[0].correct_answer}<div>`;
+				  			}
+				  			else {
+				  				html_data += `<div><input type="radio" name="answer" value="${data.results[0].incorrect_answers[j]}" id="1">${data.results[0].incorrect_answers[j]}<div>`;
+				  				j++;
+				  			}
+				  		}
+				  		$("form").html(html_data);
+				  		// $("input:nth-child(0)").attr("value",data.results[0].incorrect_answers[0])
+				  		// $("input:nth-child(0)").html(data.results[0].incorrect_answers[0])
+				  		// $("form input:nth-child(1)").attr("value",data.results[0].incorrect_answers[1])
+				  		// $("form input:nth-child(2)").attr("value",data.results[0].incorrect_answers[2])
+					});
+			});
+		});
+	</script>
+	<p></p>
+    <button>Submit</button>
+    <div id="base">
+    	<h1></h1>
+    	<h3></h3>
+    	<form method="post" action="/dosome">
+					
+		  <!-- <input type="radio" name="answer" value="" id="1"><br>
+		  <input type="radio" name="answer" value=""><br>
+		  <input type="radio" name="answer" value=""> -->
+		</form> 
+    </div>
+
+</body>
+</html>
